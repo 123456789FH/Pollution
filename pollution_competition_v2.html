@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>مسابقة التلوث — مشاهدة الحلول حسب المستوى</title>
+  <meta name="description" content="واجهة تفاعلية لعرض حلول مسابقة التلوث عبر مستويات متعددة، مع روابط فيديو من Google Drive.">
+  <meta name="theme-color" content="#6b7280">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    * { box-sizing: border-box; }
+    .level-card{ transition: transform .3s ease, box-shadow .3s ease; }
+    .level-card:hover{ transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,.2); }
+    .video-container{ position:relative; width:100%; padding-bottom:56.25%; background:#0f172a; border-radius:12px; overflow:hidden; }
+    .video-container iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
+    .dropdown-content{ max-height:0; overflow:hidden; transition:max-height .35s ease; }
+    .rotate-180{ transform: rotate(180deg); }
+    .badge-eco{
+      background-image: linear-gradient(135deg, #22c55e, #64748b);
+      color:#fff;
+      box-shadow: 0 8px 24px rgba(34,197,94,.25), inset 0 1px 0 rgba(255,255,255,.35);
+    }
+    @media (prefers-reduced-motion: reduce){
+      .level-card, .dropdown-content{ transition: none !important; }
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-b from-gray-100 to-gray-200 min-h-screen">
+  <div class="container mx-auto px-4 py-8">
+    <!-- Header -->
+    <header class="text-center mb-8">
+      <div class="inline-flex items-center justify-center gap-3 mb-3">
+        <!-- Small pollution icon (factory & smoke) -->
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gray-700/10 ring-1 ring-gray-300">
+          <svg class="w-6 h-6 text-gray-700" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <!-- Factory base -->
+            <path d="M3 19h18v2H3zM5 10h3v7H5zM9 8l4-2v4l4-2v8h-8z" />
+            <!-- Smoke -->
+            <circle cx="16" cy="5" r="1.5" fill="#9ca3af"/>
+            <circle cx="18.5" cy="3.5" r="1.2" fill="#9ca3af"/>
+            <circle cx="14" cy="3.2" r="1" fill="#9ca3af"/>
+          </svg>
+        </span>
+        <h1 class="text-4xl sm:text-5xl font-bold text-gray-800 m-0">مسابقة التلوث</h1>
+      </div>
+      <p class="text-lg text-gray-700">اختر المستوى لمشاهدة الحل</p>
+    </header>
+
+    <!-- Levels -->
+    <div class="max-w-4xl mx-auto space-y-4" id="levels">
+      <!-- Level 1 -->
+      <div class="level-card bg-white rounded-2xl shadow-lg overflow-hidden">
+        <button type="button" class="w-full p-6 flex items-center justify-between hover:bg-gray-100 transition-colors"
+                aria-expanded="false" aria-controls="level1" data-target="level1" onclick="toggleLevel('level1')">
+          <div class="flex items-center gap-4">
+            <div class="w-16 h-16 rounded-full flex items-center justify-center text-3xl font-bold badge-eco shadow">1</div>
+            <div class="text-right">
+              <h2 class="text-2xl font-bold text-gray-800">المستوى الأول</h2>
+              <p class="text-gray-600">مقدمة حول التلوث</p>
+            </div>
+          </div>
+          <svg id="arrow-level1" class="w-8 h-8 text-gray-700 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div id="level1" class="dropdown-content px-6 pb-6" role="region" aria-labelledby="arrow-level1">
+          <div class="video-container">
+            <iframe title="حل المستوى الأول (Google Drive)" src="https://drive.google.com/file/d/1vbGPbyG5uaHhFbrFsGXlUnR-cZMSJBDE/preview" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+          <div class="mt-3 text-sm text-gray-700">
+            <a class="underline hover:no-underline" href="https://drive.google.com/file/d/1vbGPbyG5uaHhFbrFsGXlUnR-cZMSJBDE/view?usp=drivesdk" target="_blank" rel="noopener">فتح الفيديو في تبويب جديد</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Level 2 -->
+      <div class="level-card bg-white rounded-2xl shadow-lg overflow-hidden">
+        <button type="button" class="w-full p-6 flex items-center justify-between hover:bg-gray-100 transition-colors"
+                aria-expanded="false" aria-controls="level2" data-target="level2" onclick="toggleLevel('level2')">
+          <div class="flex items-center gap-4">
+            <div class="w-16 h-16 rounded-full flex items-center justify-center text-3xl font-bold badge-eco shadow">2</div>
+            <div class="text-right">
+              <h2 class="text-2xl font-bold text-gray-800">المستوى الثاني</h2>
+              <p class="text-gray-600">أنواع الملوثات وتأثيرها</p>
+            </div>
+          </div>
+          <svg id="arrow-level2" class="w-8 h-8 text-gray-700 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div id="level2" class="dropdown-content px-6 pb-6" role="region" aria-labelledby="arrow-level2">
+          <div class="video-container">
+            <iframe title="حل المستوى الثاني (Google Drive)" src="https://drive.google.com/file/d/1kUVbHH96T0I5hQXjYkeRfg6XKqhIiS_Z/preview" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+          <div class="line-clamp-1 mt-3 text-sm text-gray-700">
+            <a class="underline hover:no-underline" href="https://drive.google.com/file/d/1kUVbHH96T0I5hQXjYkeRfg6XKqhIiS_Z/view?usp=drivesdk" target="_blank" rel="noopener">فتح الفيديو في تبويب جديد</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Level 3 -->
+      <div class="level-card bg-white rounded-2xl shadow-lg overflow-hidden">
+        <button type="button" class="wmx:w-full w-full p-6 flex items-center justify-between hover:bg-gray-100 transition-colors"
+                aria-expanded="false" aria-controls="level3" data-target="level3" onclick="toggleLevel('level3')">
+          <div class="flex items-center gap-4">
+            <div class="w-16 h-16 rounded-full flex items-center justify-center text-3xl font-bold badge-eco shadow">3</div>
+            <div class="text-right">
+              <h2 class="text-2xl font-bold text-gray-800">المستوى الثالث</h2>
+              <p class="text-gray-600">حلول وممارسات للحد من التلوث</p>
+            </div>
+          </div>
+          <svg id="arrow-level3" class="w-8 h-8 text-gray-700 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div id="level3" class="dropdown-content px-6 pb-6" role="region" aria-labelledby="arrow-level3">
+          <div class="video-container">
+            <iframe title="حل المستوى الثالث (Google Drive)" src="https://drive.google.com/file/d/1NLscFDEBf3wrAOdiPhm8gqsmsMumxkf0/preview" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+          <div class="mt-3 text-sm text-gray-700">
+            <a class="underline hover:no-underline" href="https://drive.google.com/file/d/1NLscFDEBf3wrAOdiPhm8gqsmsMumxkf0/view?usp=drivesdk" target="_blank" rel="noopener">فتح الفيديو في تبويب جديد</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center mt-12 text-gray-800">
+      <p class="text-lg">معًا لبيئة أنظف وهواء أنقى 🌿</p>
+      <p class="mt-2 text-sm font-semibold">شرح الاستاذ ابراهيم المسهري</p>
+    </footer>
+  </div>
+
+  <script>
+    function toggleLevel(levelId){
+      const content = document.getElementById(levelId);
+      const arrow = document.getElementById('arrow-' + levelId);
+      const btn = document.querySelector('button[data-target="' + levelId + '"]');
+      const isOpen = content.style.maxHeight && content.style.maxHeight !== '0px';
+
+      document.querySelectorAll('.dropdown-content').forEach(el => { el.style.maxHeight = null; });
+      document.querySelectorAll('[id^="arrow-"]').forEach(a => { a.classList.remove('rotate-180'); });
+      document.querySelectorAll('button[data-target]').forEach(b => b.setAttribute('aria-expanded','false'));
+
+      if(!isOpen){
+        content.style.maxHeight = content.scrollHeight + 'px';
+        arrow.classList.add('rotate-180');
+        btn.setAttribute('aria-expanded','true');
+      }
+    }
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      document.querySelectorAll('.dropdown-content').forEach(function(el){ el.style.maxHeight = null; });
+    });
+  </script>
+
+</body>
+</html>
